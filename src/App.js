@@ -11,6 +11,7 @@ function App() {
           <Route path='/' exact/>
         </Switch>
         <h1>Welcome Aboard!</h1>
+        <h2> Ule Ulo </h2>
       </Router>
       
     </>
