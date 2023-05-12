@@ -1,60 +1,39 @@
-import React, {useState, useEffect} from 'react';
-import { Link } from 'react-router-dom';
-import './Navbar.css'
-import { Button } from './button';
+import React, { useState } from "react";
+// import Logo from "../assets/pizzaLogo.png";
+import { Link } from "react-router-dom";
+import ReorderIcon from "@mui/icons-material/Reorder";
+import "../styles/Navbar.css";
 
 function Navbar() {
-  const [click, setClick] = useState(false);
-  const [button, setButton] = useState(true);
+  const [openLinks, setOpenLinks] = useState(false);
 
-  const handleClick = () => setClick(!click);
-  const closeMobileMenu = () => setClick(false);
-  const showButton = () => {
-    if(window.innerWidth <= 960){
-      setButton(false)
-    } else{
-      setButton(true)
-    }
+  const toggleNavbar = () => {
+    setOpenLinks(!openLinks);
   };
-
-  useEffect (() =>{
-    showButton()
-  }, []); 
-
-  window.addEventListener('resize',showButton);
-
   return (
-    <>
-      <nav className='navbar'>
-        <div className='navbar-container'>
-          <Link to="/" className="navbar-logo"> 
-            SEO Playboard <i className='fab fa-typo3' />
-           </Link> 
-          <div className='menu-icon' onClick={handleClick}>
-            <i className={click ? 'fas fa-times' : 'fas fa-bars'} />
-          </div>
-          <ul className={click ? 'nav-menu active' : 'nav-menu'}>
-            <li className='nav-item'> 
-              <Link to="/" className='nav-links' onClick={closeMobileMenu}>
-                Home
-                </Link>
-            </li>
-            <li className='nav-item'> 
-              <Link to="/services" className='nav-links' onClick={closeMobileMenu}>
-                Services
-                </Link>
-            </li>
-            <li className='nav-item'> 
-              <Link to="/products" className='nav-links' onClick={closeMobileMenu}>
-                Products
-                </Link>
-            </li>
-          </ul>
-          {button && <Button buttonStyle='btn--outline'>SIGN UP</Button>}
+    <div className="navbar">
+      <div className="leftSide" id={openLinks ? "open" : "close"}>
+        <Link to="/" className="navbar-logo"> 
+            <h1>SEO Playboard <i className='fab fa-typo3' /></h1>
+        </Link> 
+        <div className="hiddenLinks">
+          <Link to="/"> Home </Link>
+          <Link to="/services"> Services </Link>
+          {/* <Link to="/menu"> Menu </Link> */}
+          <Link to="/login"> Login </Link>
         </div>
-      </nav>
-    </>
-  )
+      </div>
+      <div className="rightSide">
+        <Link to="/"> Home </Link>
+        <Link to="/services"> Services </Link>
+        {/* <Link to="/menu"> Menu </Link> */}
+        <Link to="/login"> Login </Link>
+        <button onClick={toggleNavbar}>
+          <ReorderIcon />
+        </button>
+      </div>
+    </div>
+  );
 }
 
-export default Navbar
+export default Navbar;

@@ -1,19 +1,12 @@
 import './App.css';
-import Navbar from './components/Navbar';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
-const demos = {
-  soundcloud:
-    '<iframe width="100%" height="700" scrolling="yes" frameborder="yes" src="https://www.flipkart.com/" header></iframe>'
-};
+import Navbar from './components/Navbar';
+import HomePage from './pages/HomePage';
+import Services from './pages/Services';
+import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 
-function Iframe(props) {
-  return (
-    <div
-      dangerouslySetInnerHTML={{ __html: props.iframe ? props.iframe : "" }}
-    />
-  );
-}
 
 function App() {
   return (
@@ -21,15 +14,12 @@ function App() {
       <Router>
         <Navbar />
         <Switch>
-          <Route path='/' exact/>
+          <Route exact path="/" component= { HomePage } />
+          <Route path="/services" component= { Services } />
+          <Route path="/login" component= { LoginPage } />
+          <Route path="/register" component= { RegisterPage } />
         </Switch>
-        <h1>Welcome Aboard!</h1>
-        <div className="Split_frame">
-          <h1>Split Window to inspect product</h1>
-          <Iframe iframe={demos["soundcloud"]} />,
-        </div>
-      </Router>
-      
+      </Router> 
     </>
   );
 }
